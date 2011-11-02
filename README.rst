@@ -19,7 +19,7 @@ Installation
 Assuming dependencies are correctly installed, installing the application is
 as simple as running the following command sequence from your favorite shell::
 
-    ./autogen --prefx=/usr
+    ./autogen --prefix=/usr
     make
     sudo make install
 
