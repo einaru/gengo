@@ -2,7 +2,7 @@
 Name=GenGo
 Comment=Generate GObject boilerplate code
 GenericName=GObject Generator
-Exec=gengo
+Exec=gengo --gtk
 Icon=applications-development
 Terminal=false
 StartupNotify=true
