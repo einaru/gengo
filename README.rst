@@ -24,9 +24,17 @@ as simple as running the following command sequence from your favorite shell::
     sudo make install
 
 
+Screenshots
+===========
+|general|
+
+.. |general| image:: https://github.com/einaru/gengo/raw/master/data/gengo-general.png
+
+
 Resources
 =========
 Repository: https://github.com/einaru/gengo
+Issues:     https://github.com/einaru/gengo/issues
 
 
 Copyright
