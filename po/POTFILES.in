@@ -1,0 +1,5 @@
+# List of source files containing translatable strings.
+
+gengo
+ggo/utils.py
+ggo/window.py

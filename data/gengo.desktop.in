@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=GenGo
+Comment=Generate GObject boilerplate code
+GenericName=GObject Generator
+Exec=gengo
+Icon=applications-development
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=GNOME;GTK;Development;
+StartupNotify=true
