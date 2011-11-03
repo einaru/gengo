@@ -1,8 +1,24 @@
-AC_INIT([gengo], [0.1], [einar.uvslokk@linux.com])
+dnl Process this file with autoconf to produce a configure script.
+
+m4_define(gengo_major_version, 0)
+m4_define(gengo_minor_version, 1)
+m4_define(gengo_micro_version, 0)
+m4_define(gengo_version,
+		  gengo_major_version.gengo_minor_version.gengo_micro_version)
+
+AC_INIT([gengo], [gengo_version], [https://github.com/einaru/gengo/issues],
+		[gengo], [https://github.com/einaru/gengo])
+
+AC_DEFINE(GENGO_MAJOR_VERSION, gengo_major_version, [Gengo major version])
+AC_SUBST(GENGO_MAJOR_VERSION,  gengo_major_version)
+AC_DEFINE(GENGO_MINOR_VERSION, gengo_minor_version, [Gengo minor version])
+AC_SUBST(GENGO_MINOR_VERSION,  gengo_minor_version)
+AC_DEFINE(GENGO_MICRO_VERSION, gengo_micro_version, [Gengo micro version])
+AC_SUBST(GENGO_MICRO_VERSION,  gengo_micro_version)
 
 AM_INIT_AUTOMAKE([foreign])
 
-AM_PATH_PYTHON([2.6])
+AM_PATH_PYTHON([2.7])
 
 PYGOBJECT_REQUIRED_VERSION=2.90.0
 
