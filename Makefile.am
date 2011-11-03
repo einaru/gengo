@@ -1,7 +1,7 @@
 bin_SCRIPTS = \
 	gengo
 
-#nobase means gtweak dir is preserved in site-packages
+#nobase means ggo dir is preserved in site-packages
 appdir = $(pythondir)
 nobase_dist_app_PYTHON = \
 	$(wildcard $(srcdir)/ggo/*.py)
