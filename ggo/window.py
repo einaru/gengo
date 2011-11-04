@@ -10,7 +10,8 @@ import os
 from gi.repository import Gtk, GLib, Gio
 
 import ggo
-from ggo import templates, licenses, utils
+from ggo import templates, utils
+from ggo.licenses import Licenses
 
 
 def get_user_name():
@@ -62,24 +63,13 @@ class GengoWindow(Gtk.Window):
         filename = os.path.join(ggo.PKG_DATA_DIR, UI_FILE)
         self.ui = Gtk.Builder()
         self.ui.add_objects_from_file(filename, OBJECTS)
-
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.add(box)
-
-        self.infobar = Gtk.InfoBar()
-        self.infobar.set_message_type(Gtk.MessageType.INFO)
-        self.infobar.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
-        label = Gtk.Label("")
-        self.infobar.get_content_area().pack_start(label, False, False, 0)
-        label.show_all()
-        self.infobar.set_no_show_all(True)
-        self.infobar.connect("response", self.on_info_response)
+        self.init_widgets()
 
         box.pack_start(self.infobar, False, False, 0)
 
         box.pack_start(self.ui.get_object("Box"), True, False, 0)
-
-        self.init_widgets()
 
         self.set_resizable(False)
         self.set_position(Gtk.WindowPosition.CENTER)
@@ -95,10 +85,21 @@ class GengoWindow(Gtk.Window):
         self.ui.get_object("FileChooserButton").set_current_folder(os.getcwd())
         self.ui.get_object("ClassName").grab_focus()
 
+        # Create the infobar
+        self.infobar = Gtk.InfoBar()
+        self.infobar.set_message_type(Gtk.MessageType.INFO)
+        self.infobar.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
+        label = Gtk.Label("")
+        self.infobar.get_content_area().pack_start(label, False, False, 0)
+        label.show_all()
+        self.infobar.set_no_show_all(True)
+        self.infobar.connect("response", self.on_info_response)
+
+        # Setup the licenses combobox
         self.ui.get_object("Licenses").set_entry_text_column(0)
         self.ui.get_object("Licenses").set_id_column(1)
-        for _id, license in sorted(licenses.Licenses.iteritems()):
-            self.ui.get_object("Licenses").append(_id, license[0])
+        for key in sorted(Licenses.iterkeys()):
+            self.ui.get_object("Licenses").append(key, Licenses[key]["name"])
         self.ui.get_object("Licenses").insert(0, "NONE", "NONE")
         self.ui.get_object("Licenses").set_active(0)
 
@@ -120,14 +121,13 @@ class GengoWindow(Gtk.Window):
         license, prefix, files = "", _("Successfully created:"), []
 
         license_id = self.ui.get_object("Licenses").get_active_id()
-        print license_id
         if not license_id == "NONE":
-            license = licenses.Licenses[license_id][1]
+            license = Licenses[license_id]["license"]
 
         self.attr.author = self.ui.get_object("Author").get_text()
         self.attr.email = self.ui.get_object("Email").get_text()
 
-        # Create the header file
+        # Populate the source and header file
         content_h = templates.HEADER.format(license=license, **self.attr)
         content_c = templates.SOURCE.format(license=license, **self.attr)
 

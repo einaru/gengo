@@ -7,7 +7,9 @@ Description: License boilerplates for the Gengo GObject Generator.
 """
 
 Licenses = dict(
-    GPL=("GNU General Public License", """\
+    GPL=dict(name="GNU General Public License",
+             version=3,
+             license="""\
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +24,9 @@ Licenses = dict(
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """),
-    MIT=("MIT License", """\
+    MIT=dict(name="MIT License",
+             version=1,
+             license="""\
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -41,9 +45,10 @@ Licenses = dict(
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- */
 """),
-    APACHE=("Apache License", """\
+    APACHE=dict(name="Apache License",
+                version=2.0,
+                license="""\
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -56,9 +61,10 @@ Licenses = dict(
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
- */
 """),
-    DWTFYW=("Do What The Fuck You Want To Public License", """\
+    DWTFYW=dict(name="Do What The Fuck You Want To Public License",
+                version=2,
+                license="""\
  *
  *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
  *                    Version 2, December 2004
@@ -71,14 +77,13 @@ Licenses = dict(
  *   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
  *
  *  0. You just DO WHAT THE FUCK YOU WANT TO.
- */
 """)
 )
 """The Licenses dict contains boilerplates for a number of FOSS licenses.
 
 The keys are common upper case identifiers for the licenses and, the
-corresponding values is tuples containing the name of the licenes and
-the actual license boilerplate.
+corresponding values is a dict with information about the license;
+name, version, and the actual license boilerplate text.
 
 It is safe to keep appending entries to this dict, without worrying
 about breaking the rest of the application.
