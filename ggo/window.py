@@ -10,8 +10,7 @@ import os
 from gi.repository import Gtk, GLib, Gio
 
 import ggo
-from ggo import templates
-from ggo import utils
+from ggo import templates, licenses, utils
 
 
 def get_user_name():
@@ -96,6 +95,13 @@ class GengoWindow(Gtk.Window):
         self.ui.get_object("FileChooserButton").set_current_folder(os.getcwd())
         self.ui.get_object("ClassName").grab_focus()
 
+        self.ui.get_object("Licenses").set_entry_text_column(0)
+        self.ui.get_object("Licenses").set_id_column(1)
+        for _id, license in sorted(licenses.Licenses.iteritems()):
+            self.ui.get_object("Licenses").append(_id, license[0])
+        self.ui.get_object("Licenses").insert(0, "NONE", "NONE")
+        self.ui.get_object("Licenses").set_active(0)
+
     def on_destroy(self, widget, data=None):
         Gtk.main_quit()
 
@@ -113,8 +119,10 @@ class GengoWindow(Gtk.Window):
         """
         license, prefix, files = "", _("Successfully created:"), []
 
-        if self.ui.get_object("IncLicense").get_active():
-            license = templates.LICENSE_GPL
+        license_id = self.ui.get_object("Licenses").get_active_id()
+        print license_id
+        if not license_id == "NONE":
+            license = licenses.Licenses[license_id][1]
 
         self.attr.author = self.ui.get_object("Author").get_text()
         self.attr.email = self.ui.get_object("Email").get_text()
