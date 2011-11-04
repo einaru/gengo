@@ -33,8 +33,8 @@ Screenshots
 
 Resources
 =========
-Repository: https://github.com/einaru/gengo
-Issues:     https://github.com/einaru/gengo/issues
+- Repository: https://github.com/einaru/gengo
+- Issues:     https://github.com/einaru/gengo/issues
 
 
 Copyright

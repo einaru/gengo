@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=GenGo
+Name=Gengo
 Comment=Generate GObject boilerplate code
 GenericName=GObject Generator
 Exec=gengo --gtk
